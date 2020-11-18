@@ -28,7 +28,8 @@ Function for returning a list of modules (all).
 		'''
 Unload module, when you call an extension, it still loads, this method is typically used to operate the module file.
 		'''
-		del sys.modules["modules."+module[1:]]
+		try: del sys.modules["modules."+module[1:]]
+		except: pass
 		
 	def load(module):
 		'''
@@ -43,7 +44,8 @@ returns the class.
 Reloading modules,
 that requires the module name as an argument.
 		'''
-		del sys.modules["modules."+module[1:]]
+		try: del sys.modules["modules."+module[1:]]
+		except: pass
 		loader.dynamic_import("modules."+module[1:])
 		
 	def init():
