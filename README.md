@@ -149,6 +149,7 @@ class Main:
 
 
 Мой телеграм: https://t.me/mozahist228
+
 Канал с модулями и новостями: https://t.me/LiteBotMN
 
 LiteBot v1.0.8, Copyright (C) 2020-2020 DarkGamer <https://github.com/DarkGa>
