@@ -31,10 +31,11 @@ class Main:
 			try:
 				params=m.text.split()
 				r = requests.get(params[1])
-				open(params[2], "w").write(r.text)
-				try: loader.load(params[1]); await m.edit("**Load succesfull**")
-				except: await m.edit("**Load failed!**")
+				open("modules/"+params[2]+".py", "w").write(r.text)
+				try: loader.load(params[2]); await m.edit("**Load succesfull**")
+				except Exception as e: await m.edit("**Load failed!**"); print(e)
 				try: loader.reload(params[1])
 				except: pass
+				
 			except Exception as e: await m.edit(e)
 			
