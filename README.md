@@ -1,5 +1,7 @@
 # LiteBot
 
+![banner](banner/twitter_header_photo_2.png)
+
 > Мы не несем ответственности за ваш аккаунт, у нас есть базовый объект защиты, но он не гарантирует 100% защиту от скам модулей!
 
 <details markdown='1'><summary>Меню</summary>
