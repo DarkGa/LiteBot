@@ -16,13 +16,7 @@ class loader:
 		'''
 Function for returning a list of modules (all).
 		'''
-		ct=0
-		modules=os.listdir("modules")
-		list_modules=[]
-		for module in modules:
-			if module[-3:]==".py": list_modules.append("."+module[:-3]); ct+=1
-			else: pass
-		return list(list_modules)
+		return ["." + module[:-3] for module in os.listdir("modules") if module.endswith(".py")]
 		
 	def unload(module):
 		'''
