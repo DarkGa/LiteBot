@@ -15,6 +15,8 @@
 
 [Protection](#protection)
 
+[Utils](#utils)
+
 [Создание своего модуля](#создание-своего-модуля)
 </details>
 
@@ -115,6 +117,52 @@ core.protector.protector.scan(module)
 > Проверяет модуль на предмет запрещенных строк
 
 > return str(logs)
+
+## Utils
+
+```python
+core.utils.utils.buffer
+```
+
+> Класс буфера для хранения данных
+
+```python
+core.utils.utils.buffer.write(data: list)
+```
+
+> Функция для записи данных в буфер для последующего использования
+
+> Принимает данные ввиде списка [ключ, данные]
+
+```python
+core.utils.utils.buffer.read(data: str)
+```
+
+> Функция для чтения данных из буфера для последующего использования
+
+> Принимает название ключа
+
+> return data
+
+```python
+core.utils.utils.buffer.clean(data: str)
+```
+
+> Функция для очистки данных в буфере
+
+> Принимает название ключа
+
+
+```python
+core.utils.utils.bash(code: str)
+```
+
+> Функция для выполнения bash кода и возврата ответа (если есть)
+
+> Принимает код bash скрипта
+
+> return str(output)
+
 
 ## Создание своего модуля
 
