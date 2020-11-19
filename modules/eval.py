@@ -6,9 +6,9 @@ from meval import meval
 
 class Main:
 	
-	version="1.0.0"
+	version="1.0.1"
 	info="Выполнение python кода через модуль."
-	group="Language"
+	group="Python"
 	
 	async def init(app, m):
 
@@ -30,17 +30,25 @@ class Main:
 		sys.stdout = old_stdout
 		
 		if len(logs)==0:
-			await m.edit(f'''**code**:
+			try: await m.edit(f'''**Code**:
 	
 ```{code}```
 	
-**result**:
+**Result**:
 	
 ```{result.getvalue()}```
 ''')
+			except: await m.edit(f'''**Code**:
+	
+```{code}```
+	
+**Traceback output**:
+	
+```pyrogram.errors.exceptions.bad_request_400.MessageTooLong: [400 MESSAGE_TOO_LONG]: The message text is over 4096 characters (caused by "messages.EditMessage")```
+''')
 
 		else:
-			await m.edit(f'''**code**:
+			await m.edit(f'''**Code**:
 	
 ```{code}```
 	
