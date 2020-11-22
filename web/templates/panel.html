@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LiteBot</title>
+    {% include "includes/imports.html" %}
+</head>
+<body>
+    {% include "includes/navbar.html" %}
+
+    <div style="margin-top: 70px;" class="container jumbotron">
+        <div class="row">
+            <div class="col-sm">
+                <div class="card bg-primary">
+                    <div class="card-header text-white">
+                        Информация
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">Модулей: {{modules}}</li>
+                        <li class="list-group-item">Версия python: {{python_v}}</li>
+                        <li style="display: flex; align-items: center; justify-content: center; flex-direction: column;" class="list-group-item">
+                            <script type="text/javascript">(function() {var script=document.createElement("script");script.type="text/javascript";script.async =true;script.src="//telegram.im/widget-button/index.php?id=@LiteBotMN";document.getElementsByTagName("head")[0].appendChild(script);})();</script>
+                            <a href="https://telegram.im/@LiteBotMN" target="_blank" class="telegramim_button telegramim_shadow" style="font-size:16px;width:150px;background:#27A5E7;box-shadow:1px 1px 5px #27A5E7;color:#FFFFFF;border-radius:100px;" title=""><i></i> Подписаться</a>
+                        </li>
+                    </ul>
+                  </div>
+            </div>
+            <div style="margin-top: 20px; margin-bottom: 20px;" class="col-sm">
+                
+                <div class="card bg-primary">
+                    <div style="text-align: center;" class="card-header text-white">
+                        <h3>Настройки модулей</h3>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item" style="display: flex; align-items: center; justify-content: center; flex-direction: column;"><a style="margin-top: 20px;" class="btn blue-gradient" href="/modules" type="button">Перейти</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-sm">
+                <div class="row">
+                    <div class="col-sm">
+                        <div class="card bg-primary">
+                            <div class="card-header text-white">
+                                Настройки
+                            </div>
+                            <ul class="list-group list-group-flush">
+                                <li style="display: flex; align-items: center; justify-content: center; flex-direction: column;" class="list-group-item"><a class="btn btn-primary" type="button" onclick="ReloadModules()">Перезагрузить модули</a></li>
+                                <li style="display: flex; align-items: center; justify-content: center; flex-direction: column;" class="list-group-item"><a class="btn btn-danger" onclick="ConfirmStopWeb()" type="button">Отключить веб панель</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
