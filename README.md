@@ -164,6 +164,62 @@ core.utils.utils.bash(code: str)
 > return str(output)
 
 
+```python
+core.utils.utils.db
+```
+
+> Класс для работы с базой данных бота
+
+```python
+core.utils.utils.db.create_table(table: str, column: str)
+```
+
+> Функция для создании таблицы с колонкой
+
+> Принимает название таблицы и колонки
+
+```python
+core.utils.utils.db.add_table(table: str, column: str)
+```
+
+> Функция для добавления в таблицу новой колонки
+
+> Принимает название таблицы и колонки
+
+```python
+core.utils.utils.db.insert_into(table: str, column: str, data)
+```
+
+> Функция для записи данных в колонку таблицы
+
+> Принимает название таблицы, колонки и данных
+
+```python
+core.utils.utils.db.update(table: str, column: str, data)
+```
+
+> Функция для обновлении данных в колонке таблицы
+
+> Принимает название таблицы, колонки и данных
+
+```python
+core.utils.utils.db.drop_table(table: str)
+```
+
+> Функция для удаления таблицы
+
+> Принимает название таблицы
+
+```python
+core.utils.utils.db.select(table: str, column: str)
+```
+
+> Функция для получения данных из колонки таблицы
+
+> Принимает название таблицы и колонки
+
+> return list(data)
+
 ## Создание своего модуля
 
 > Все модули дожны использовать ассинхронную функцию 
