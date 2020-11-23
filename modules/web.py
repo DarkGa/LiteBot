@@ -16,5 +16,5 @@ class Main:
 		try: status=utils.buffer.read("web_panel")
 		except: utils.buffer.write(["web_panel", True]); web(app); status=False
 		
-		if status: await m.edit("**Веб панель уже запущена и доступна по аддресу 127.0.0.1:5000**")
-		else: await m.edit("**Веб панель была запущена и доступна по аддресу 127.0.0.1:5000**")
+		if status: await m.edit("**Веб панель уже запущена и доступна по адресу 127.0.0.1:5000**")
+		else: await m.edit("**Веб панель была запущена и доступна по адресу 127.0.0.1:5000**")
