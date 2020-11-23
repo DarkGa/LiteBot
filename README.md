@@ -59,7 +59,7 @@ pip3 install -r requirements.txt
 
 ## Конфигурация
 
-Основной файл конфигурации `configure.ini`, открыв его мы увидим api_id и api_hash, получаем их [тут](https://my.telegram.org) и подставляем.
+Основной файл конфигурации `config.ini`, открыв его мы увидим api_id и api_hash, получаем их [тут](https://my.telegram.org) и подставляем.
 
 Далее запускаем бота командой:
 ```bash
