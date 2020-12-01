@@ -10,7 +10,7 @@ class Main:
 	async def init(app, m):
 		
 		utils.bash("rm -rf LiteBot; git clone https://github.com/DarkGa/LiteBot")
-		files=[file for file in os.listdir("LiteBot") if file not in ["main.py", "config.ini"]]
+		files=[file for file in os.listdir("LiteBot") if file not in ["config.ini"]]
 		for file in files:
 			if os.path.isfile(file): utils.bash(f"cp LiteBot/{file} {os.getcwd()}")
 			else: utils.bash(f"cp -r LiteBot/{file} {os.getcwd()}")
