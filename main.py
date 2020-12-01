@@ -12,8 +12,8 @@ global my_id
 
 with app:
 	my_id=app.get_me()["id"]
-print(loader.modules())
-@app.on_message(filters.me)
+
+@app.on_message(filters.me & filters.text)
 async def main(self, m):
 	if my_id==m.from_user.id:
 		module=m.text.split()
