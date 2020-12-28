@@ -6,10 +6,10 @@
     <title>LiteBot</title>
     {% include "includes/imports.html" %}
 </head>
-<body>
+<body style="background-color: {{background|safe}}; color: {{text|safe}};">
     {% include "includes/navbar.html" %}
     
-    <div class="container jumbotron" style="margin-top: 70px;">
+    <div class="container jumbotron" style="margin-top: 70px; background-color: {{background|safe}};">
     	<script>
     		function delModule(module){
 				var res=confirm("Вы уверены что хотите удалить модуль?");

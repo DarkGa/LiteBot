@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LiteBot</title>
+    {% include "includes/imports.html" %}
+</head>
+<body style="background-color: {{background|safe}}; color: {{text|safe}};">
+    {% include "includes/navbar.html" %}
+    
+    <script>
+    		function changeTheme(theme){
+				var XHR = ("onload" in new XMLHttpRequest()) ? XMLHttpRequest : XDomainRequest;
+				var xhr = new XHR();
+				xhr.open('GET', "http://127.0.0.1:5000/theme?them="+theme, true);
+				xhr.onload = function() {
+					alert( this.responseText );
+				}
+				xhr.onerror = function() {
+					alert( 'Ошибка ' + this.status );
+				}
+				xhr.send(); 
+			}
+	</script>
+    
+    <div style="margin-top: 70px;background-color: {{background|safe}}; " class="container">
+        <ul style="background-color: {theme_loaded['background']};" class="list-group list-group-flush">
+         	
+         	{{m_list|safe}}
+         
+        </ul>
+    </div>
+
+</body>
+</html>
