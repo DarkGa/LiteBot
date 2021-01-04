@@ -51,6 +51,74 @@ def modules():
 			'''
 	return render_template("modules.html", m_list=modules_list, all=theme_loaded["all"], badges=theme_loaded["badges"], background=theme_loaded["background"], text=theme_loaded["text"])
 
+@web.route("/repo")
+def repo():
+	
+	add=request.args.get('add')
+	dels=request.args.get('del')
+	
+	if dels is not None:
+		
+		fr=open("web/configs/repo.list", "r")
+		data=fr.read().replace(dels+"\n", "")
+		fr.close()
+		
+		fw=open("web/configs/repo.list", "w")
+		fw.write(data)
+		fw.close()
+		
+		return "Репозиторий удален."
+	
+	elif add is not None:
+		
+		f=open("web/configs/repo.list", "a")
+		f.write(add+"\n")
+		f.close()
+		
+		return "Репозиторий добавлен."
+	
+	else:
+	
+		on_theme=json.loads(open("web/theme/settings/config.json", "r").read())
+		theme_loaded=json.loads(open("web/theme/"+on_theme["theme"]+".json", "r").read())
+		try:
+			f=open("web/configs/repo.list", "r")
+			repos=f.read().split("\n")
+			f.close()
+			
+			body=''
+			
+			for repo in repos:
+					
+				if len(repo)!=0:
+				
+					md=requests.get(f"https://raw.githubusercontent.com/{repo}/LiteBot-store/main/modules/database").text
+			
+					if md=="404: Not Found": md=0
+					else: md=len(md.split("\n"))
+					
+					body+=f'''
+						<li style="display: flex; align-items: center; justify-content: center; flex-direction: column; background-color: {theme_loaded['background']};" class="list-group-item">
+							<h4><span class="badge badge-{theme_loaded["badges"]}">Репозиторий:</span> {repo}</h4>
+							<p><span class="badge badge-{theme_loaded["badges"]}">Количество модулей:</span> {md}</p>
+							<li style="display: flex; align-items: center; justify-content: center; flex-direction: column;" class="list-group-item"><a class="btn btn-danger" onclick="delRepo('{repo}');document.location.reload();" type="button">Удалить</a></li>
+						</li>
+					'''
+		
+		except:  body=""
+		
+		template=f'''
+	<form style="background-color: {theme_loaded['background']}; display: flex; align-items: center; justify-content: center; flex-direction: column;" onsubmit="return false;" id="repo" class="md-form">
+	<input type="text" id="repo" class="form-control">
+	  <label for="repo">Репозиторий</label>
+	  <button class="btn btn-{theme_loaded['all']}" onclick='addRepo();document.location.reload();' >Сохранить</button>
+	</form>
+	
+	{body}
+		'''
+		
+		return render_template("configure.html", module=template, all=theme_loaded["all"], badges=theme_loaded["badges"], background=theme_loaded["background"], text=theme_loaded["text"])
+
 @web.route("/store")
 def store():
 	on_theme=json.loads(open("web/theme/settings/config.json", "r").read())
@@ -72,11 +140,38 @@ def store():
 			<li style="display: flex; align-items: center; justify-content: center; flex-direction: column; background-color: {theme_loaded['background']};" class="list-group-item">
 			   {logo}
 				<h4><span class="badge badge-{theme_loaded["badges"]}">Название:</span> {config["name"]}</h4>
+				<span class="badge badge-success">Officially</span>
 				<p><span class="badge badge-{theme_loaded["badges"]}">Версия:</span> {ver}</p>
 				<p><span class="badge badge-{theme_loaded["badges"]}">Информация:</span> {info}</p
 				<li style="display: flex; align-items: center; justify-content: center; flex-direction: column;" class="list-group-item"><a class="btn btn-{theme_loaded["all"]}" href="/store?module={module}" type="button">Подробнее</a></li>
 			</li>
 			'''
+		f=open("web/configs/repo.list", "r")
+		repos=f.read().split("\n")
+		f.close()
+			
+		for repo in repos:
+			database=requests.get(f"https://raw.githubusercontent.com/{repo}/LiteBot-store/main/modules/database").text
+			if database!="404: Not Found":
+				for module in database.split("\n"):
+					config=requests.get(f"https://raw.githubusercontent.com/{repo}/LiteBot-store/main/configs/{module}.json").json()
+					try: ver=config["version"]
+					except: ver="Unknown"
+					try: info=config["info"].replace("\n", "<br>")
+					except: info="Unknown"
+					if len(config["logo"])!=0: logo=f"<img style='width: 100%;' src='https://github.com/DarkGa/LiteBot-store/raw/main/logo/{config['logo']}'>"
+					else: logo=''
+					modules_list+=f'''
+					<li style="display: flex; align-items: center; justify-content: center; flex-direction: column; background-color: {theme_loaded['background']};" class="list-group-item">
+					   {logo}
+						<h4><span class="badge badge-{theme_loaded["badges"]}">Название:</span> {config["name"]}</h4>
+						<p><span class="badge badge-{theme_loaded["badges"]}">Репозиторий:</span> {repo}</p>
+						<p><span class="badge badge-{theme_loaded["badges"]}">Версия:</span> {ver}</p>
+						<p><span class="badge badge-{theme_loaded["badges"]}">Информация:</span> {info}</p
+						<li style="display: flex; align-items: center; justify-content: center; flex-direction: column;" class="list-group-item"><a class="btn btn-{theme_loaded["all"]}" href="/store?module={module}" type="button">Подробнее</a></li>
+					</li>
+					'''
+		
 		return render_template("store.html", m_list=modules_list, all=theme_loaded["all"], badges=theme_loaded["badges"], background=theme_loaded["background"], text=theme_loaded["text"])
 	else:
 		config=requests.get(f"https://raw.githubusercontent.com/DarkGa/LiteBot-store/main/configs/{module}.json").json()
@@ -265,3 +360,5 @@ web.use_evalex=False
 
 def web_run(res):
 	pt(target=web.run).start()
+
+#web.run(debug=True)
